@@ -1,0 +1,23 @@
+
+on: 
+  push:
+    branches:
+      - main
+name: GitHub Actions
+jobs:
+  Explore-GitHub-Actions:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Sync files
+        uses: Ricardo/FTP-Deploy-Action
+        with:
+          server: ${{ secrets.ftp_host}}
+          username: ${{ secrets.ftp_user}}
+          password: ${{ secrets.ftp_password}}
+          server-dir: public_html/deploy/
+
+
